@@ -10,21 +10,28 @@
     <div class="topnav">
       <router-link to="/matters">Matters</router-link>
       <router-link to="/clients">Clients</router-link>
+      
       <!-- <a class="active" href="#home">Home</a>
       <a href="#news">News</a>
       <a href="#contact">Contact</a>
       <a href="#about">About</a> -->
+      <Hamburger/>
+
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import Hamburger from './Hamburger.vue';
 
 export default Vue.extend({
   name: 'Clients',
   props: {
     msg: String,
   },
+  components: {
+    Hamburger
+  }
 });
 </script>
 
