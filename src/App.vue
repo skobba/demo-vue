@@ -11,11 +11,17 @@
 import Vue from 'vue';
 import HelloWorld from './components/HelloWorld.vue';
 import Header from './components/Header.vue';
+import store from './store';
 
 export default Vue.extend({
   name: 'app',
   components: {
     Header
+  },
+  computed: {
+    count () {
+      return store.state.count
+    }
   }
 });
 </script>
