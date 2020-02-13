@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import ApolloExample from './components/ApolloExample.vue';
 import Header from './components/Header.vue';
 import store from './store';
 

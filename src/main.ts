@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import Home from './components/Home.vue';
 import Clients from './components/Clients.vue';
 import Matters from './components/Matters.vue';
+import Login from './components/Login.vue';
+import { createProvider } from './vue-apollo'
 
 // 1. Use plugin.
 // This installs <router-view> and <router-link>,
@@ -24,6 +26,7 @@ const router = new VueRouter({
     { path: '/', component: Home },
     { path: '/clients', component: Clients },
     { path: '/matters', component: Matters },
+    { path: '/login', component: Login },
 //    { path: '/é', component: Unicode }
   ]
 })
@@ -33,6 +36,7 @@ new Vue({
   data: () => ({ n: 0 }),
   render: h => h(App),
   router,
+  apolloProvider: createProvider(),
   components: { App }
 }).$mount('#app')
 
