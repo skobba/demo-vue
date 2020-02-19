@@ -2,10 +2,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import Home from './components/Home.vue';
+import Account from './components/Account.vue';
+import Admin from './components/Admin.vue';
 import Clients from './components/Clients.vue';
 import Matters from './components/Matters.vue';
 import Login from './components/Login.vue';
 import { createProvider } from './vue-apollo'
+
+
+
 
 // 1. Use plugin.
 // This installs <router-view> and <router-link>,
@@ -24,6 +29,8 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     { path: '/', component: Home },
+    { path: '/admin', component: Admin },
+    { path: '/account', component: Account },
     { path: '/clients', component: Clients },
     { path: '/matters', component: Matters },
     { path: '/login', component: Login },

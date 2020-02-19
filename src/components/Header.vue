@@ -8,8 +8,10 @@
     </p> -->
 
     <div class="topnav">
-      <router-link to="/matters">Matters</router-link>
       <router-link to="/clients">Clients</router-link>
+      <router-link to="/matters">Matters</router-link>
+      <router-link to="/admin">Admin</router-link>
+      <router-link to="/account">Account</router-link>
       
       <!-- <a class="active" href="#home">Home</a>
       <a href="#news">News</a>
@@ -60,6 +62,11 @@ export default Vue.extend({
 
 /* Add a color to the active/current link */
 .topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.router-link-active {
   background-color: #4CAF50;
   color: white;
 }

@@ -1,9 +1,9 @@
 <template>
   <div class="cookies">
     <h3>Cookies</h3>
-    <button @click="sendRequest">sendRequest</button>
+    <p>HttpOnly cookies can only be set by backend and read by backend</p>
     <button @click="setCookie">Set cookie</button>
-    <button @click="setHttpOnlyCookie">Set HttpOnly cookie</button>
+    <button @click="sendRequest">Send Request with Cookies</button>
     
     <pre>{{ cookies }}</pre>
   </div>
@@ -30,13 +30,6 @@ export default Vue.extend({
       let value = 'somevaluefromfrontend';
       let thirty = 60 * 60 * 24 * 30;
       document.cookie = `${key}=${value};path=/;max-age=${thirty};`; // one cookie at a time
-    },
-    setHttpOnlyCookie () {
-      console.log("setHttpOnlyCookie"); // eslint-disable-line
-      let key = 'fromvue-httponly';
-      let value = 'somevaluefromfrontend-httponly';
-      let thirty = 60 * 60 * 24 * 30;
-      document.cookie = `${key}=${value};path=/;max-age=${thirty};HttpOnly`; // one cookie at a time
     },
     sendRequest () {
       fetch("http://localhost:3000/refresh_token", {

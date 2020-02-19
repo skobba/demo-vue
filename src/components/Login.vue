@@ -23,14 +23,17 @@
             </div> -->
         </form>
         <button  v-on:click="login">Login</button>
+        <button  v-on:click="getAccessToken">GetAccessToken</button>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import LOGIN from '../graphql/Login.gql';
+import GET_ACCESS_TOKEN from '../graphql/GetAccessToken.gql'
 import ADD_MESSAGE from '../graphql/AddMessage.gql';
 import { USER_ID, ACCESS_TOKEN } from '../settings';
+import { getAccessToken, setAccessToken } from "../accessToken";
 
 export default Vue.extend({
     name: 'login',
@@ -65,7 +68,8 @@ export default Vue.extend({
                 update: (store, { data }) => {
                     console.log("data: " + JSON.stringify(data, null, 2)); // eslint-disable-line
 
-                    this.saveUserData(data.Login.user._id , data.Login.accessToken);
+                    setAccessToken(data.Login.accessToken);
+                    //this.saveUserData(data.Login.user._id , data.Login.accessToken);
                     // Read the data from our cache for this query.
                     // const data = store.readQuery({ query: TAGS_QUERY })
                     // // Add our tag from the mutation to the end
@@ -74,17 +78,17 @@ export default Vue.extend({
                     // store.writeQuery({ query: TAGS_QUERY, data })
 
 
-                    console.log("setCookie (refresh_token)"); // eslint-disable-line
+/*                     console.log("setCookie (refresh_token)"); // eslint-disable-line
                     let key = 'refresh_token';
                     let value = data.Login.accessToken;
                     let thirty = 60 * 60 * 24 * 30;
-                    document.cookie = `${key}=${value};path=/;max-age=${thirty};`; // one cookie at a time
+                    document.cookie = `${key}=${value};path=/;max-age=${thirty};`; // one cookie at a time */
 
                     this.skobba = !this.skobba;
             
 
                     setTimeout(() => { 
-                        this.$router.push({ path: 'clients' })
+                        this.$router.push({ path: 'admin' })
                     }, 200);
                 },
                 // Optimistic UI
@@ -125,6 +129,43 @@ export default Vue.extend({
             }, 200);
 
 
+        },
+        getAccessToken() {
+            this.$apollo.mutate({
+                // Mutation
+                mutation: GET_ACCESS_TOKEN,
+                // Parameters
+                // variables: {
+                //     input: {email:"gjermund@skobba.net", password: "pw"},
+                // },
+
+                update: (store, { data }) => {
+                    //console.log("data: " + JSON.stringify(data, null, 2)); // eslint-disable-line
+                    console.log("getAccessToken from refresh_token)"); // eslint-disable-line
+
+                },
+                // Optimistic UI
+                // Will be treated as a 'fake' result as soon as the request is made
+                // so that the UI can react quickly and the user be happy
+                // optimisticResponse: {
+                //     __typename: 'Mutation',
+                //     addTag: {
+                //     __typename: 'Tag',
+                //     id: -1,
+                //     label: newTag,
+                //     },
+                // },
+                // }).then((data) => {
+                // // Result
+                // console.log(data)
+                // }).catch((error) => {
+                // // Error
+                // console.error(error)
+                // // We restore the initial user input
+                // this.newTag = newTag
+                // })
+            
+            })
         },
         handleSubmit(e: any) {
 

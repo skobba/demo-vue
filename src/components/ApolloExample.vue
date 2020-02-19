@@ -32,10 +32,10 @@
         v-for="matter of matters"
         :key="matter._id"
         class="matter"
-      >
+      > 
         <div>{{ matter.title }}</div>
-        
       </div>
+
     </div>
 
 

@@ -1,11 +1,6 @@
 <template>
   <div>
-
     <div class="clients">Clients Page</div>
-    <router-link to="/login">Login</router-link>
-    <counter></counter>
-    <cookies></cookies>
-
   </div>
 </template>
 
@@ -19,6 +14,6 @@ export default Vue.extend({
   props: {
     msg: String,
   },
-  components: { Counter, Cookies }
+  components: { }
 });
 </script>
