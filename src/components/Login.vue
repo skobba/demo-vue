@@ -73,11 +73,18 @@ export default Vue.extend({
                     // // Write our data back to the cache.
                     // store.writeQuery({ query: TAGS_QUERY, data })
 
+
+                    console.log("setCookie (refresh_token)"); // eslint-disable-line
+                    let key = 'refresh_token';
+                    let value = data.Login.accessToken;
+                    let thirty = 60 * 60 * 24 * 30;
+                    document.cookie = `${key}=${value};path=/;max-age=${thirty};`; // one cookie at a time
+
                     this.skobba = !this.skobba;
             
 
                     setTimeout(() => { 
-                        this.$router.push({ path: 'matters' })
+                        this.$router.push({ path: 'clients' })
                     }, 200);
                 },
                 // Optimistic UI
