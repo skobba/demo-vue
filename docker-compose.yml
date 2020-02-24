@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  demo-vue:
+    build: ../demo-vue
+    image: demo-graph/vue:latest
+    ports:
+      - 8081:8000

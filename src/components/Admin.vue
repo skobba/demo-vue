@@ -21,6 +21,9 @@
         <button @click="sendGqlQueryMethod1">Method1 (run on component display)</button>
         <button @click="sendGqlQueryMethod2">Method2</button>
         <button @click="refreshAccessToken">refreshAccessToken</button>
+        <h4>Run graphql query</h4>
+        <textarea name="graphqlQuery" v-model="graphqlQuery" cols="40" rows="5"></textarea>
+        <button @click="runGraphqlQuery">Run Query</button>
       </div>
       <div class="box d">
         <h3>Grapgql Result</h3>
@@ -37,8 +40,19 @@ import Counter from './Counter.vue'
 import Cookies from './Cookies.vue'
 import ACCOUNT from '../graphql/Account.gql'
 import ACCESS_TOKEN from '../graphql/GetAccessToken.gql'
-
 import { getAccessToken, setAccessToken } from "../accessToken";
+import gql from 'graphql-tag';
+
+// eslint-disable-next-line
+console.log("process.env.VUE_APP_GRAPHQL_HTTP=" + process.env.VUE_APP_GRAPHQL_HTTP);
+const httpEndpoint = process.env.VUE_APP_GRAPHQL_HTTP;// || 'http://localhost:3000/graphql'
+// Files URL root
+let filesRoot: string = "";
+if ( httpEndpoint ) {
+  // eslint-disable-next-line
+  console.log("Files URL root: " + httpEndpoint.substr(0, httpEndpoint.indexOf('/graphql')));
+  filesRoot = process.env.VUE_APP_FILES_ROOT || httpEndpoint.substr(0, httpEndpoint.indexOf('/graphql'))
+}
 
 export default Vue.extend({
   name: 'Admin',
@@ -46,7 +60,8 @@ export default Vue.extend({
   data: () => {
     return {
       myVariables: null,
-      result: {}
+      result: {},
+      graphqlQuery: ''
     }
   },
   apollo: {
@@ -102,6 +117,19 @@ export default Vue.extend({
       console.log("sendGqlQueryMethod2"); // eslint-disable-line
       this.$apollo.query({
         query: ACCOUNT,
+        variables: { },
+        fetchPolicy: 'no-cache'
+      }).then(data => {
+        this.result = data;
+        console.log("data: " + JSON.stringify(data, null, 2)) // eslint-disable-line
+      });
+    },
+    runGraphqlQuery () {
+      const graphqlQueryGQL = gql(this.graphqlQuery);
+
+      console.log("runGraphqlQuery"); // eslint-disable-line
+      this.$apollo.query({
+        query: graphqlQueryGQL,
         variables: { },
         fetchPolicy: 'no-cache'
       }).then(data => {
