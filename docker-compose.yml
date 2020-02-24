@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  fdk-admin-gui:
+    build: ../demo-vue
+    image: demo-graph/vue:latest
+    ports:
+      - 8136:8000
+    environment:
+      - OIDC_ISSUER
+      - FDK_HARVEST_ADMIN_HOST
+      - ORGANISATION_CATALOGUE_HOST
