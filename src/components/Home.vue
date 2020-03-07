@@ -3,6 +3,7 @@
   <div class="home">
     <h1>Home Page</h1>
     <router-link to="/login">Login</router-link>
+    <div>VUE_APP_GRAPHQL_HTTP={{graphql_backend}}</div>
   </div>
 </template>
 
@@ -14,6 +15,11 @@ export default Vue.extend({
   props: {
     msg: String,
   },
+  data() {
+    return {
+      graphql_backend: process.env.VUE_APP_GRAPHQL_HTTP
+    }
+  }
 });
 </script>
 

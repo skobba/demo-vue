@@ -60,7 +60,8 @@ export default Vue.extend({
                 mutation: LOGIN,
                 // Parameters
                 variables: {
-                    input: {email:"gjermund@skobba.net", password: "pw"},
+                    //input: {email:"gjermund@skobba.net", password: "pw"},
+                    input: {email: this.username, password: this.password},
                 },
                 // Update the cache with the result
                 // The query will be updated with the optimistic response

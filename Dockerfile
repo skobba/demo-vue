@@ -29,6 +29,9 @@ RUN npm set progress=false && \
 
 # COPY --chown=app:app .babelrc tsconfig.json jest.config.js ./
 COPY --chown=app:app tsconfig.json ./
+
+# COPY and rename env file
+COPY --chown=app:app default.env ./.env
 COPY --chown=app:app webpack.config.js ./webpack.config.js
 # COPY --chown=app:app test ./test
 COPY --chown=app:app src ./src

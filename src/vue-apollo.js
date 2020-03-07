@@ -9,6 +9,7 @@ import { getAccessToken, setAccessToken } from "./accessToken";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 import jwtDecode from "jwt-decode";
 
+
 // Install the vue plugin
 Vue.use(VueApollo)
 
@@ -16,8 +17,13 @@ Vue.use(VueApollo)
 const AUTH_TOKEN = 'apollo-token'
 
 // Http endpoint
-const httpEndpoint = process.env.VUE_APP_GRAPHQL_HTTP || 'http://localhost:3000/graphql'
+// eslint-disable-next-line
+console.log("process.env.VUE_APP_GRAPHQL_HTTP=" + process.env.VUE_APP_GRAPHQL_HTTP);
+const httpEndpoint = process.env.VUE_APP_GRAPHQL_HTTP;// || 'http://localhost:3000/graphql'
+
 // Files URL root
+// eslint-disable-next-line
+console.log("Files URL root: " + httpEndpoint.substr(0, httpEndpoint.indexOf('/graphql')));
 export const filesRoot = process.env.VUE_APP_FILES_ROOT || httpEndpoint.substr(0, httpEndpoint.indexOf('/graphql'))
 
 Vue.prototype.$filesRoot = filesRoot
@@ -95,7 +101,7 @@ const linkRefresh = new TokenRefreshLink({
   fetchAccessToken: () => {
     console.log("fetchAccessToken");  // eslint-disable-line
 
-    return fetch("http://localhost:3000/refresh_token", {
+    return fetch(`${filesRoot}/refresh_token`, {
       method: "POST",
       credentials: "include"
     });
@@ -132,7 +138,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 })
 
 const link = createHttpLink({
-  uri: 'http://localhost:3000/graphql',
+  uri: httpEndpoint, //'http://localhost:3000/graphql',
   credentials: 'include'
 });
 
