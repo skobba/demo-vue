@@ -61,3 +61,7 @@ fetch("http://localhost:3000/graphql", {
 
 
 fetch("http://localhost:3000/graphql", {"credentials":"include","headers":{"accept":"*/*","accept-language":"en,nb;q=0.9,no;q=0.8,nn;q=0.7,en-US;q=0.6","authorization":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTNkMWNlMGUzYjA3OTBlZWM0ZWExODIiLCJpYXQiOjE1ODI0NTIzNDEsImV4cCI6MTU4MjQ1MzI0MX0.-dWXLyyg9pjAjxzEQtISACv6IhZ27fHcA3o9_h8Ixzw","content-type":"application/json","sec-fetch-mode":"cors","sec-fetch-site":"same-site"},"referrer":"http://localhost:8080/admin","referrerPolicy":"no-referrer-when-downgrade","body":"{\"operationName\":\"GetAccessToken\",\"variables\":{},\"query\":\"mutation GetAccessToken {\\n  GetAccessToken {\\n    accessToken\\n    __typename\\n  }\\n}\\n\"}","method":"POST","mode":"cors"});
+
+
+# Login with REST
+curl -X POST -H "Content-Type: application/json" --data '{ "email": "gjermund@skobba.net", "password": "pw" }' http://localhost:3000/login
